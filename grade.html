@@ -1,1 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Grade Scheme</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="phone-container">
+    <div class="orb orb-2"></div>
 
+    <div class="top-bar">
+      <a href="index.html" class="back-btn">← Home</a>
+      <span class="page-title">Grade Scheme</span>
+      <span style="width: 40px;"></span>
+    </div>
+
+    <div class="content">
+      <div class="card">
+        <div class="form-group">
+          <label>Numerical Score (0-100)</label>
+          <input type="number" id="score" class="input-field" placeholder="0-100">
+        </div>
+        <button class="btn-start" onclick="calcGrade()">▶ Evaluate Grade</button>
+      </div>
+
+      <div id="canvas-card" class="canvas-result">
+        <div class="canvas-header">
+          <span style="font-size: 0.85rem; font-weight: 700;">Evaluation Output</span>
+          <span class="canvas-badge">Active Result</span>
+        </div>
+        <div class="result-row"><span class="result-label">Numerical Score</span><span class="result-val" id="val-score">-</span></div>
+        <div class="result-row"><span class="result-label">Letter Grade</span><span class="result-val" id="val-letter" style="color: var(--primary); font-size: 1.3rem;">-</span></div>
+      </div>
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="index.html" class="nav-link">Hub</a>
+      <a href="mdas.html" class="nav-link">MDAS</a>
+      <a href="age.html" class="nav-link">Age</a>
+      <a href="circle.html" class="nav-link">Circle</a>
+      <a href="temp.html" class="nav-link">Temp</a>
+      <a href="grade.html" class="nav-link active">Grade</a>
+    </nav>
+  </div>
+
+  <script>
+    function gradeScheme(score) {
+      if (score >= 90 && score <= 100) return 'A';
+      if (score >= 80 && score < 90) return 'B';
+      if (score >= 70 && score < 80) return 'C';
+      if (score >= 60 && score < 70) return 'D';
+      if (score >= 0 && score < 60) return 'F';
+      return 'Invalid Score';
+    }
+
+    function calcGrade() {
+      let score = parseFloat(document.getElementById('score').value);
+      if (isNaN(score) || score < 0 || score > 100) return;
+
+      let letter = gradeScheme(score);
+
+      document.getElementById('val-score').textContent = score;
+      document.getElementById('val-letter').textContent = letter;
+      
+      let card = document.getElementById('canvas-card');
+      card.classList.remove('active');
+      void card.offsetWidth;
+      card.classList.add('active');
+
+      console.log("Grade Evaluation:", { score, letter });
+    }
+  </script>
+</body>
+</html>
