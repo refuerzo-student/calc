@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Circumference</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="phone-container">
+    <div class="orb orb-2"></div>
+
+    <div class="top-bar">
+      <a href="index.html" class="back-btn">← Home</a>
+      <span class="page-title">Circumference</span>
+      <span style="width: 40px;"></span>
+    </div>
+
+    <div class="content">
+      <div class="card">
+        <div class="form-group">
+          <label>Circle Radius</label>
+          <input type="number" id="radius" class="input-field" placeholder="0.0">
+        </div>
+        <button class="btn-start" onclick="calcCircle()">▶ Compute Circumference</button>
+      </div>
+
+      <div id="canvas-card" class="canvas-result">
+        <div class="canvas-header">
+          <span style="font-size: 0.85rem; font-weight: 700;">Geometry Output</span>
+          <span class="canvas-badge">Active Result</span>
+        </div>
+        <div class="result-row"><span class="result-label">Radius</span><span class="result-val" id="val-r">-</span></div>
+        <div class="result-row"><span class="result-label">Circumference</span><span class="result-val" id="val-c" style="color: var(--accent);">-</span></div>
+      </div>
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="index.html" class="nav-link">Hub</a>
+      <a href="mdas.html" class="nav-link">MDAS</a>
+      <a href="age.html" class="nav-link">Age</a>
+      <a href="circle.html" class="nav-link active">Circle</a>
+      <a href="temp.html" class="nav-link">Temp</a>
+      <a href="grade.html" class="nav-link">Grade</a>
+    </nav>
+  </div>
+
+  <script>
+    function calcCircle() {
+      let r = parseFloat(document.getElementById('radius').value);
+      if (isNaN(r) || r <= 0) return;
+
+      let circumference = 2 * Math.PI * r;
+
+      document.getElementById('val-r').textContent = r;
+      document.getElementById('val-c').textContent = circumference.toFixed(4);
+      
+      let card = document.getElementById('canvas-card');
+      card.classList.remove('active');
+      void card.offsetWidth;
+      card.classList.add('active');
+
+      console.log("Circumference Output:", { radius: r, circumference });
+    }
+  </script>
+</body>
+</html>
