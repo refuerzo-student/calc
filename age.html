@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Age Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="phone-container">
+    <div class="bg-mesh"></div>
+    <div class="orb orb-1"></div>
+
+    <div class="top-bar">
+      <a href="index.html" class="back-btn">← Home</a>
+      <span class="page-title">Age Calculator</span>
+      <span style="width: 40px;"></span>
+    </div>
+
+    <div class="content">
+      <div class="card">
+        <div class="form-group">
+          <label>Select Date of Birth</label>
+          <input type="date" id="dob" class="input-field">
+        </div>
+        <button class="btn-start" onclick="calcAge()">▶ Calculate Age Breakdown</button>
+      </div>
+
+      <!-- Live Canvas Card -->
+      <div id="canvas-card" class="canvas-result">
+        <div class="canvas-header">
+          <span style="font-size: 0.82rem; font-weight: 600;">Age Analytics</span>
+          <span class="canvas-badge">Live Computation</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Exact Age</span>
+          <span class="result-val" id="val-exact">-</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Total Months Elapsed</span>
+          <span class="result-val" id="val-total-months">-</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Total Days Elapsed</span>
+          <span class="result-val" id="val-total-days">-</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Age in 10 Years</span>
+          <span class="result-val" id="val-future" style="color: var(--mono-300);">-</span>
+        </div>
+      </div>
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="index.html" class="nav-link">Hub</a>
+      <a href="mdas.html" class="nav-link">MDAS</a>
+      <a href="age.html" class="nav-link active">Age</a>
+      <a href="circle.html" class="nav-link">Circle</a>
+      <a href="temp.html" class="nav-link">Temp</a>
+      <a href="grade.html" class="nav-link">Grade</a>
+    </nav>
+  </div>
+
+  <script>
+    function calcAge() {
+      const dobVal = document.getElementById('dob').value;
+      if (!dobVal) return;
+
+      const birthDate = new Date(dobVal);
+      const today = new Date();
+
+      if (birthDate > today) return;
+
+      // Exact Year, Month, Day calculation
+      let years = today.getFullYear() - birthDate.getFullYear();
+      let months = today.getMonth() - birthDate.getMonth();
+      let days = today.getDate() - birthDate.getDate();
+
+      if (days < 0) {
+        months--;
+        // Get number of days in previous month
+        const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+        days += prevMonth.getDate();
+      }
+
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+
+      // Total Elapsed Time
+      const diffTime = Math.abs(today - birthDate);
+      const totalDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      const totalMonths = (years * 12) + months;
+
+      // Age in 10 Years
+      const futureYears = years + 10;
+
+      // Update UI Output
+      document.getElementById('val-exact').textContent = `${years}y ${months}m ${days}d`;
+      document.getElementById('val-total-months').textContent = `${totalMonths.toLocaleString()} mos`;
+      document.getElementById('val-total-days').textContent = `${totalDays.toLocaleString()} days`;
+      document.getElementById('val-future').textContent = `${futureYears}y ${months}m ${days}d`;
+
+      // Trigger Spring Animation Canvas
+      const card = document.getElementById('canvas-card');
+      card.classList.remove('active');
+      void card.offsetWidth; // Repaint trigger
+      card.classList.add('active');
+
+      console.log("Detailed Age Breakdown:", { years, months, days, totalMonths, totalDays, futureYears });
+    }
+  </script>
+</body>
+</html>
