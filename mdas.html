@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>MDAS Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="phone-container">
+    <div class="orb orb-1"></div>
+
+    <div class="top-bar">
+      <a href="index.html" class="back-btn">← Home</a>
+      <span class="page-title">MDAS Calculator</span>
+      <span style="width: 40px;"></span>
+    </div>
+
+    <div class="content">
+      <div class="card">
+        <div class="form-group">
+          <label>First Number</label>
+          <input type="number" id="n1" class="input-field" placeholder="0">
+        </div>
+        <div class="form-group">
+          <label>Second Number</label>
+          <input type="number" id="n2" class="input-field" placeholder="0">
+        </div>
+        <button class="btn-start" onclick="calcMDAS()">▶ Calculate Results</button>
+      </div>
+
+      <!-- Live Canvas Card -->
+      <div id="canvas-card" class="canvas-result">
+        <div class="canvas-header">
+          <span style="font-size: 0.85rem; font-weight: 700;">Computation Output</span>
+          <span class="canvas-badge">Active Result</span>
+        </div>
+        <div class="result-row"><span class="result-label">Addition (+)</span><span class="result-val" id="val-add">-</span></div>
+        <div class="result-row"><span class="result-label">Subtraction (−)</span><span class="result-val" id="val-sub">-</span></div>
+        <div class="result-row"><span class="result-label">Multiplication (×)</span><span class="result-val" id="val-mul">-</span></div>
+        <div class="result-row"><span class="result-label">Division (÷)</span><span class="result-val" id="val-div">-</span></div>
+        <div class="result-row"><span class="result-label">Modulus (%)</span><span class="result-val" id="val-mod">-</span></div>
+      </div>
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="index.html" class="nav-link">Hub</a>
+      <a href="mdas.html" class="nav-link active">MDAS</a>
+      <a href="age.html" class="nav-link">Age</a>
+      <a href="circle.html" class="nav-link">Circle</a>
+      <a href="temp.html" class="nav-link">Temp</a>
+      <a href="grade.html" class="nav-link">Grade</a>
+    </nav>
+  </div>
+
+  <script>
+    function calcMDAS() {
+      let n1 = parseFloat(document.getElementById('n1').value);
+      let n2 = parseFloat(document.getElementById('n2').value);
+
+      if (isNaN(n1) || isNaN(n2)) return;
+
+      let add = n1 + n2, sub = n1 - n2, mul = n1 * n2;
+      let div = n2 !== 0 ? (n1 / n2).toFixed(2) : "Undefined";
+      let mod = n2 !== 0 ? n1 % n2 : "Undefined";
+
+      document.getElementById('val-add').textContent = add;
+      document.getElementById('val-sub').textContent = sub;
+      document.getElementById('val-mul').textContent = mul;
+      document.getElementById('val-div').textContent = div;
+      document.getElementById('val-mod').textContent = mod;
+      
+      let card = document.getElementById('canvas-card');
+      card.classList.remove('active');
+      void card.offsetWidth; // Force CSS repaint for re-triggering spring animation
+      card.classList.add('active');
+
+      console.log("MDAS Output:", { add, sub, mul, div, mod });
+    }
+  </script>
+</body>
+</html>
