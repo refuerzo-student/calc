@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Dashboard Hub</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .card-link {
+      background: var(--mono-800);
+      border-radius: var(--radius);
+      padding: 18px;
+      border: 1px solid var(--glass-border);
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      transition: all 0.2s ease;
+    }
+    .card-link:hover { border-color: var(--glass-border-active); }
+    .card-link:active { transform: scale(0.98); }
+    .card-info h2 { font-size: 0.95rem; font-weight: 600; color: var(--mono-fff); }
+    .card-info p { font-size: 0.75rem; color: var(--mono-400); margin-top: 2px; }
+    .card-icon {
+      width: 40px; height: 40px; background: rgba(255, 255, 255, 0.04); color: var(--mono-100);
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      font-weight: 600; font-size: 0.95rem; border: 1px solid var(--glass-border);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="phone-container">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="top-bar">
+      <div>
+        <span class="page-title">Utility Suite</span>
+        <p style="font-size: 0.7rem; color: var(--mono-400);">Monochrome Collection</p>
+      </div>
+      <a href="welcome.html" class="back-btn">Intro</a>
+    </div>
+
+    <div class="content">
+      <a href="mdas.html" class="card-link">
+        <div class="card-info">
+          <h2>1. MDAS Calculator</h2>
+          <p>Compute +, −, ×, ÷, and %</p>
+        </div>
+        <div class="card-icon">+-</div>
+      </a>
+
+      <a href="age.html" class="card-link">
+        <div class="card-info">
+          <h2>2. Age Calculator</h2>
+          <p>Compute current age & 10 yrs ahead</p>
+        </div>
+        <div class="card-icon">01</div>
+      </a>
+
+      <a href="circle.html" class="card-link">
+        <div class="card-info">
+          <h2>3. Circumference</h2>
+          <p>Compute 2 × π × radius</p>
+        </div>
+        <div class="card-icon">◯</div>
+      </a>
+
+      <a href="temp.html" class="card-link">
+        <div class="card-info">
+          <h2>4. Temperature Converter</h2>
+          <p>Convert Celsius to Fahrenheit</p>
+        </div>
+        <div class="card-icon">°C</div>
+      </a>
+
+      <a href="grade.html" class="card-link">
+        <div class="card-info">
+          <h2>5. Grade Scheme</h2>
+          <p>Evaluate score to letter grade</p>
+        </div>
+        <div class="card-icon">A+</div>
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>
